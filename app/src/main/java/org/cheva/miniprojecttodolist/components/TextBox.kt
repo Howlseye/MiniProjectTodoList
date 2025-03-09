@@ -56,8 +56,8 @@ fun TextBox(
         Spacer(modifier = Modifier.height(8.dp))
         OutlinedTextField(
             modifier =
-            Modifier.fillMaxWidth().
-            border(1.dp, MaterialTheme.colorScheme.primary, RoundedCornerShape(8.dp)),
+                Modifier.fillMaxWidth().
+                border(1.dp, MaterialTheme.colorScheme.primary, RoundedCornerShape(8.dp)),
             shape = RoundedCornerShape(8.dp),
             leadingIcon = icon,
             trailingIcon = icon2,

@@ -9,6 +9,8 @@
     <string name="password_hint">Masukkan password anda</string>
     <string name="visibility_on">Visibility On</string>
     <string name="visibility_off">Visibility Off</string>
+    <string name="add_label">Tambah Tugas</string>
+    <string name="add_hint">Tambah tugas baru</string>
     <!--  String untuk LoginScreen  -->
     <string name="login_headline">Login</string>
     <string name="login_hint">Selamat datang! Yuk login pake email dan password kamu</string>

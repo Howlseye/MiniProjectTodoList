@@ -11,6 +11,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import org.cheva.miniprojecttodolist.dashboard.DashboardScreen
+import org.cheva.miniprojecttodolist.dashboard.DashboardState
+import org.cheva.miniprojecttodolist.dashboard.DashboardViewModel
 import org.cheva.miniprojecttodolist.login.LoginScreen
 import org.cheva.miniprojecttodolist.login.LoginViewModel
 import org.cheva.miniprojecttodolist.navigation.DashboardScreen
@@ -41,7 +43,12 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         composable<DashboardScreen> {
-                            DashboardScreen()
+                            val viewModel = viewModel<DashboardViewModel>()
+                            val state by viewModel.state.collectAsStateWithLifecycle()
+                            DashboardScreen(
+                                state = state,
+                                onEvent = viewModel::onEvent,
+                            )
                         }
                         composable<LoginScreen> {
                             val viewModel = viewModel<LoginViewModel>()
