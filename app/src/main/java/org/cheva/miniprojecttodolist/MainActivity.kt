@@ -11,7 +11,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import org.cheva.miniprojecttodolist.dashboard.DashboardScreen
+import org.cheva.miniprojecttodolist.login.LoginScreen
+import org.cheva.miniprojecttodolist.login.LoginViewModel
 import org.cheva.miniprojecttodolist.navigation.DashboardScreen
+import org.cheva.miniprojecttodolist.navigation.LoginScreen
 import org.cheva.miniprojecttodolist.navigation.RegisterScreen
 import org.cheva.miniprojecttodolist.register.RegisterScreen
 import org.cheva.miniprojecttodolist.register.RegisterViewModel
@@ -40,7 +43,15 @@ class MainActivity : ComponentActivity() {
                         composable<DashboardScreen> {
                             DashboardScreen()
                         }
-                        TODO("Definisikan LoginScreen")
+                        composable<LoginScreen> {
+                            val viewModel = viewModel<LoginViewModel>()
+                            val state by viewModel.state.collectAsStateWithLifecycle()
+                            LoginScreen(
+                                state = state,
+                                onEvent = viewModel::onEvent,
+                                onNavigate = { navController.navigate(it) }
+                            )
+                        }
                     }
                 )
             }

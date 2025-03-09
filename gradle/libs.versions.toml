@@ -1,5 +1,5 @@
 [versions]
-agp = "8.8.2"
+agp = "8.7.2"
 kotlin = "2.1.0"
 coreKtx = "1.15.0"
 junit = "4.13.2"
@@ -9,8 +9,8 @@ lifecycleRuntimeKtx = "2.8.7"
 activityCompose = "1.10.1"
 composeBom = "2025.02.00"
 lifecycleViewmodelCompose = "2.8.7" # dependency viewmodel compose
-navigationCompose = "2.8.8" # dependency navigation
-kotlinxSerializationJson = "1.8.0" # dependency untuk support navigation
+navigationCompose = "2.8.0-rc01" # dependency navigation
+kotlinxSerializationJson = "1.7.1" # dependency untuk support navigation
 materialIconsExtended = "1.7.8" # dependency icon
 
 [libraries]

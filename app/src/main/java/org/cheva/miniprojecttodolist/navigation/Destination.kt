@@ -7,3 +7,6 @@ object RegisterScreen
 
 @Serializable
 object DashboardScreen
+
+@Serializable
+object LoginScreen

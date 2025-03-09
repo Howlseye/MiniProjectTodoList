@@ -8,7 +8,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -17,16 +20,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.delay
 import org.cheva.miniprojecttodolist.R
+import org.cheva.miniprojecttodolist.components.*
 import org.cheva.miniprojecttodolist.navigation.DashboardScreen
-import org.cheva.miniprojecttodolist.ui.components.OutlinedTextField
+import org.cheva.miniprojecttodolist.navigation.LoginScreen
 import org.cheva.miniprojecttodolist.ui.components.ResultDialog
-import org.cheva.miniprojecttodolist.ui.components.SecureTextField
 import org.cheva.miniprojecttodolist.ui.theme.MiniProjectTodoListTheme
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -57,41 +63,71 @@ fun RegisterScreen(
             horizontalAlignment = Alignment.Start,
             verticalArrangement = Arrangement.Center
         ) {
-            Text(
+
+            CustomText(
                 text = stringResource(R.string.register_headline),
-                style = MaterialTheme.typography.headlineMedium
+                textAlign = TextAlign.Center,
+                textSize = 32.sp,
+                textWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.primary
             )
+
             Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = stringResource(R.string.register_hint),
-                style = MaterialTheme.typography.bodyLarge
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            OutlinedTextField(
-                label = stringResource(R.string.name_label),
+            TextBox(
+                name = stringResource(R.string.name_label),
+                placeholder = stringResource(R.string.name_hint),
                 value = state.name,
+                icon = {
+                    Icon(
+                        painter = painterResource(id = R.drawable.person),
+                        contentDescription = "Person",
+                        modifier = Modifier.size(28.dp),
+                    )
+                },
                 onValueChange = { onEvent(RegisterEvent.OnNameChanged(it)) },
-                keyboardType = KeyboardType.Text,
-                hint = stringResource(R.string.name_hint)
             )
+
             Spacer(modifier = Modifier.height(8.dp))
-            OutlinedTextField(
-                label = stringResource(R.string.email_label),
+            TextBox(
+                name = stringResource(R.string.email_label),
+                placeholder = stringResource(R.string.email_hint),
                 value = state.email,
+                icon = {
+                    Icon(
+                        painter = painterResource(id = R.drawable.email),
+                        contentDescription = "Email",
+                        modifier = Modifier.size(28.dp),
+                    )
+                },
                 onValueChange = { onEvent(RegisterEvent.OnEmailChanged(it)) },
-                keyboardType = KeyboardType.Email,
-                hint = stringResource(R.string.email_hint)
             )
+
             Spacer(modifier = Modifier.height(8.dp))
-            SecureTextField(
-                label = stringResource(R.string.password_label),
+            TextBox(
+                name = stringResource(R.string.password_label),
+                placeholder = stringResource(R.string.password_hint),
                 value = state.password,
+                icon = {
+                    Icon(
+                        painter = painterResource(id = R.drawable.lock),
+                        contentDescription = "Lock",
+                        modifier = Modifier.size(28.dp),
+                    )
+               },
+                icon2 = {
+                    IconButton(onClick = { onEvent(RegisterEvent.OnPasswordVisibilityChanged(!state.passwordVisible))}) {
+                        Icon(
+                            painter = painterResource(id = if (state.passwordVisible) R.drawable.eye2 else R.drawable.eye),
+                            contentDescription = if (state.passwordVisible) "Show" else "Hide",
+                            modifier = Modifier.size(28.dp),
+                        )
+                    }
+                },
                 onValueChange = { onEvent(RegisterEvent.OnPasswordChanged(it)) },
-                keyboardType = KeyboardType.Password,
-                isVisible = state.passwordVisible,
-                onVisibilityChange = { onEvent(RegisterEvent.OnPasswordVisibilityChanged(it)) },
-                hint = stringResource(R.string.password_hint)
+                pass = state.passwordVisible,
             )
+
+            Spacer(modifier = Modifier.height(8.dp))
             Button(
                 modifier = Modifier.fillMaxWidth(),
                 onClick = { onEvent(RegisterEvent.OnRegisterClicked) }
@@ -100,9 +136,9 @@ fun RegisterScreen(
             }
             TextButton(
                 modifier = Modifier.fillMaxWidth(),
-                onClick = { onNavigate(TODO("Navigasi ke LoginScreen")) }
+                onClick = { onNavigate(LoginScreen) }
             ) {
-                Text(stringResource(R.string.to_register))
+                Text(stringResource(R.string.to_login))
             }
         }
     }
