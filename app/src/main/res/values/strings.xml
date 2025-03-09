@@ -1,12 +1,12 @@
 <resources>
-    <string name="app_name">Mini Project Todo List</string>
+    <string name="app_name">Todo List</string>
     <!--  String untuk component  -->
-    <string name="name_label">Name</string>
+    <string name="name_label">Nama</string>
     <string name="name_hint">Masukkan nama anda</string>
     <string name="email_label">Email</string>
-    <string name="email_hint">Gunakan email anda</string>
+    <string name="email_hint">Masukkan email anda</string>
     <string name="password_label">Password</string>
-    <string name="password_hint">Gunakan password anda</string>
+    <string name="password_hint">Masukkan password anda</string>
     <string name="visibility_on">Visibility On</string>
     <string name="visibility_off">Visibility Off</string>
     <!--  String untuk LoginScreen  -->
