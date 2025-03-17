@@ -42,7 +42,7 @@ fun TextBox(
     pass: Boolean = false,
     theme: Boolean = isSystemInDarkTheme()
 ) {
-
+    
     Column(
         modifier = modifier.padding(8.dp)
     ) {

@@ -10,3 +10,6 @@ object DashboardScreen
 
 @Serializable
 object LoginScreen
+
+@Serializable
+object TambahTugasScreen

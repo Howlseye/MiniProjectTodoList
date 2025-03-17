@@ -31,6 +31,8 @@ import kotlinx.coroutines.delay
 import org.cheva.miniprojecttodolist.R
 import org.cheva.miniprojecttodolist.components.*
 import org.cheva.miniprojecttodolist.navigation.DashboardScreen
+import org.cheva.miniprojecttodolist.navigation.DataEvent
+import org.cheva.miniprojecttodolist.navigation.DataState
 import org.cheva.miniprojecttodolist.navigation.LoginScreen
 import org.cheva.miniprojecttodolist.ui.components.ResultDialog
 import org.cheva.miniprojecttodolist.ui.theme.MiniProjectTodoListTheme
@@ -40,11 +42,14 @@ import org.cheva.miniprojecttodolist.ui.theme.MiniProjectTodoListTheme
 fun RegisterScreen(
     state: RegisterState,
     onEvent: (RegisterEvent) -> Unit,
-    onNavigate: (Any) -> Unit
+    onNavigate: (Any) -> Unit,
+    dataState: DataState,
+    dataEvent: (DataEvent) -> Unit,
 ) {
     LaunchedEffect(state.successRegister) {
         if (state.successRegister){
             delay(1000)
+            dataEvent(DataEvent.ChangeUsername(state.name))
             onNavigate(DashboardScreen)
         }
     }
@@ -151,7 +156,9 @@ private fun RegisterScreenPrev() {
         RegisterScreen(
             state = RegisterState(),
             onEvent = {},
-            onNavigate = {}
+            onNavigate = {},
+            dataState = DataState(),
+            dataEvent = {}
         )
     }
 }

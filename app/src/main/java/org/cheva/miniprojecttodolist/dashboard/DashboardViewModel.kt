@@ -11,29 +11,16 @@ class DashboardViewModel: ViewModel() {
 
     fun onEvent(event: DashboardEvent) {
         when(event) {
-            is DashboardEvent.OnTaskChanged -> changeTask(event.task)
-            is DashboardEvent.DeleteTask -> deleteTask(event.task)
-            DashboardEvent.OnAddClicked -> addTask(state.value.newtask)
+            DashboardEvent.ResetSuccessDelete -> resetSuccessDelete()
+            DashboardEvent.DeleteTask -> deleteTask()
         }
     }
 
-    fun changeTask(task: String) {
-        _state.update { it.copy(newtask = task) }
+    fun deleteTask() {
+        _state.update { it.copy(successDelete = true) }
     }
 
-    fun addTask(task: String) {
-        val updateList = _state.value.list.toMutableList()
-        updateList.add(task)
-        _state.update { it.copy(list = updateList) }
-    }
-
-
-    fun deleteTask(task: String) {
-        val updateList = _state.value.list.toMutableList()
-        val index = updateList.indexOf(task)
-        if (index in updateList.indices) {
-            updateList.removeAt(index)
-            _state.value = DashboardState(list = updateList)
-        }
+    fun resetSuccessDelete() {
+        _state.update { it.copy(successDelete = false) }
     }
 }

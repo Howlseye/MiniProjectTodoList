@@ -23,7 +23,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -32,12 +31,11 @@ import kotlinx.coroutines.delay
 import org.cheva.miniprojecttodolist.R
 import org.cheva.miniprojecttodolist.components.CustomText
 import org.cheva.miniprojecttodolist.components.TextBox
-import org.cheva.miniprojecttodolist.components.VectorIcon
 import org.cheva.miniprojecttodolist.navigation.DashboardScreen
+import org.cheva.miniprojecttodolist.navigation.DataEvent
+import org.cheva.miniprojecttodolist.navigation.DataState
 import org.cheva.miniprojecttodolist.navigation.RegisterScreen
-import org.cheva.miniprojecttodolist.ui.components.OutlinedTextField
 import org.cheva.miniprojecttodolist.ui.components.ResultDialog
-import org.cheva.miniprojecttodolist.ui.components.SecureTextField
 import org.cheva.miniprojecttodolist.ui.theme.MiniProjectTodoListTheme
 
 
@@ -45,13 +43,18 @@ import org.cheva.miniprojecttodolist.ui.theme.MiniProjectTodoListTheme
 @Composable
 fun LoginScreen(
     state: LoginState,
+    dataState: DataState,
     onEvent: (LoginEvent) -> Unit,
+    dataEvent: (DataEvent) -> Unit,
     onNavigate: (Any) -> Unit
+
     )
 {
+
     LaunchedEffect(state.successLogin) {
         if (state.successLogin){
             delay(1000)
+            dataEvent(DataEvent.ChangeUsername(state.name))
             onNavigate(DashboardScreen)
         }
     }
@@ -144,7 +147,9 @@ private fun LoginScreenPrev() {
         LoginScreen(
             state = LoginState(),
             onEvent = {},
-            onNavigate = {}
+            onNavigate = {},
+            dataState = DataState(),
+            dataEvent = {}
         )
     }
 }
